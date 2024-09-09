@@ -7,11 +7,16 @@
     <!-- link que se vincula el archivo CSS externo para aplicar estilo a la página -->
     <title>Ejercicio 5</title> <!-- Establece el título de la página que se mostrará en la pestaña del navegador -->
 </head>
-<body onload="iniciarSemaforo()">
+<body onload="iniciarSemaforo()">  <!-- Cuando el cuerpo se carga, dispara la función 'iniciarSemaforo()' para iniciar la simulación del semáforo -->
+    <!-- encabezado principal de la pagina web -->
     <h1>Simulador de semáforo</h1>
+    <!-- Un div que representa la luz roja del semáforo, con un ID de 'rojo' y una clase de 'circulo' -->
     <div id="rojo" class="circulo"></div>
+    <!-- Un div que representa la luz amarilla del semáforo, con un ID de 'amarillo' y una clase de 'circulo' -->
     <div id="amarillo" class="circulo"></div>
+     <!-- Un div que representa la luz verde del semáforo, con un ID de 'verde' y una clase de 'circulo' -->
     <div id="verde" class="circulo"></div>
+    <!-- Vincula un archivo JavaScript externo para la funcionalidad -->
     <script src="./js/ejercicio5.js"></script>
 </body>
 </html>
