@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- link que se vincula el archivo CSS externo para aplicar estilo a la página -->
+    <link rel="stylesheet" href="./css/ejercicio2.css"> 
+    <title>Ejercicio 2</title> <!-- Establece el título de la página que se mostrará en la pestaña del navegador -->
+</head>
+<!-- Llama a la función 'iniciar()' cuando se carga la página para iniciar una acción automática, para la rotación de la imagen -->
+<body onload="iniciar();"> 
+    <!-- encabezado principal de la pagina web -->
+    <h1 id="titulo1">Pase de Imágenes automático</h1>
+
+    <!-- Se crea un contenedor div para el control deslizante de las imagenes -->
+    <div id="cajaSlide">
+        <img id="imgSlide" src="./images/img1.jpg" title="Imagen" alt="Imagen" onclick="rotarImagenes();"> <!--Link que muestra la imagen con un id para su manipulación, y llama a la función 'rotarImagenes()' al hacer clic para rotar imágenes -->
+        <br/> <!-- Salto de línea para espaciado -->
+
+        <form> <!-- Se crea un contenedor de formularios para los botones-->
+            <input type="button" value="Parar"
+                onclick="clearInterval(temporizador);"> <!-- Botón etiquetado como 'Parar' que detiene la rotación de la imagen borrando el intervalo establecido con la variable 'temporizador', la darle en parar la imagen se queda quieta  -->
+            
+            <input type="button" value="Continuar" onclick="iniciar();">  <!-- Botón etiquetado como 'Continuar' que reinicia la rotación de la imagen llamando a la función 'iniciar()', al darle continuar las imagenes se va pasando una por una  -->
+        </form>
+    </div>
+    <script src="./js/ejercicio2.js"></script> <!-- Vincula un archivo JavaScript externo para la funcionalidad -->
+</body>
+</html>

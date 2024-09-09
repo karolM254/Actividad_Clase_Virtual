@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 4</title> <!-- Establece el título de la página que se mostrará en la pestaña del navegador -->
+</head>
+<body>
+    <h1>A Calcular</h1>  <!-- encabezado principal de la pagina web -->
+    <!-- Campo de entrada para el primer número -->
+    <input type="number" id="num1" placeholder="Número 1"> 
+    <!-- Menú desplegable para seleccionar la operación a realizar -->
+    <select id="operacion">
+          <!-- Opción para la suma -->
+        <option value="+">+</option>
+         <!-- Opción para la resta -->
+        <option value="-">-</option>
+        <!-- Opción para la multiplicación -->
+        <option value="*">*</option>
+         <!-- Opción para la división -->
+        <option value="/">/</option>
+    </select>
+    <!-- Campo de entrada para el segundo número -->
+    <input type="number" id="num2" placeholder="Número 2">
+    <!-- Botón que ejecuta la función calcular() al hacer clic -->
+    <button onclick="calcular()">Calcular</button>
+    <!-- Elemento <p> para mostrar el resultado del cálculo -->
+    <p id="resultado"></p>
+    <script src="./js/ejercicio4.js"></script> <!-- Vincula un archivo JavaScript externo para la funcionalidad -->
+</body>
+</html>

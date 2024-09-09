@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3</title> <!-- Establece el título de la página que se mostrará en la pestaña del navegador -->
+</head>
+<body>
+    <h1>Adivina el Número</h1>  <!-- encabezado principal de la pagina web -->
+    <p>Intenta adivinar un número entre 1 y 100.</p>     <!-- Proporciona instrucciones al usuario -->
+    <!-- Campo de entrada donde el usuario puede escribir un número; el tipo 'número' garantiza solo la entrada numérica -->
+    <input type="number" id="numero" placeholder="Escribe tu número"> 
+    <button onclick="adivinar()">Adivinar</button>  <!-- Botón que, al hacer clic, activa la función 'adivinar' definida en el archivo JavaScript -->
+    <!-- Elemento de párrafo donde se mostrará el resultado o la retroalimentación del juego de adivinanzas -->
+    <p id="resultado"></p>
+    <!-- Vincula un archivo JavaScript externo para la funcionalidad -->
+    <script src="./js/ejercicio3.js"></script>
+</body>
+</html>
