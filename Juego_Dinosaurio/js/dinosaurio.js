@@ -146,7 +146,7 @@ function Estrellarse() {
 
     // Detiene la animación de los pájaros
     var birds = document.querySelectorAll(".birds");  // Selecciona todos los pájaros.
-    birds.forEach(function(bird) {
+    birds.forEach(function(bird) { //forEach metood de los arrays se utiliza para iterra sobre los elementos de un array
         bird.style.animationPlayState = "paused";  // Pausa la animación de cada pájaro.
     });
 }
@@ -170,13 +170,13 @@ function DecidirCrearNubes() {
 // Crea un nuevo obstáculo (cactus)
 function CrearObstaculo() {
     var obstaculo = document.createElement("div");  // Crea un nuevo div para el obstáculo.
-    contenedor.appendChild(obstaculo);  // Lo añade al contenedor del juego.
+    contenedor.appendChild(obstaculo);  // Lo añade al contenedor del juego.  //appenChild agregar nuevos elementos a elementos de un documento o tambien para moverlo el elemento de la pagina
     obstaculo.classList.add("cactus");  // Añade la clase de cactus.
     if(Math.random() > 0.5) obstaculo.classList.add("cactus2");  // A veces añade una clase extra para variación.
-    obstaculo.posX = contenedor.clientWidth;  // Coloca el obstáculo en el borde derecho.
+    obstaculo.posX = contenedor.clientWidth;  // Coloca el obstáculo en el borde derecho.  //clienteWidth es para determinar el límite máximo de la pantalla donde se deben generar o mover los obstáculos 
     obstaculo.style.left = contenedor.clientWidth + "px";  // Lo coloca visualmente en el borde derecho.
 
-    obstaculos.push(obstaculo);  // Añade el obstáculo a la lista.
+    obstaculos.push(obstaculo);  // Añade el obstáculo a la lista.  // .push() se utiliza para agregar uno o más elementos al final de un array.
     tiempoHastaObstaculo = tiempoObstaculoMin + Math.random() * (tiempoObstaculoMax - tiempoObstaculoMin) / gameVel;  // Calcula el tiempo hasta el próximo obstáculo.
 }
 
