@@ -1,139 +1,201 @@
+/* Reinicia el padding y margen de todos los elementos a 0 para eliminar los espacios predeterminados */
 * {
     padding: 0;
     margin: 0;
 }
 
+/* Estilo del cuerpo del documento para ocupar toda la altura de la pantalla y alinear elementos al centro vertical */
 body{
-    height: 100vh;
-    background: #80f4f4;
-    display: flex;
-    align-items: center;
+    height: 100vh; /* Define la altura de la pantalla como el 100% del viewport */
+    background: #484848; /* Color de fondo azul claro */
+    display: flex; /* Flexbox para alinear los elementos hijos */
+    align-items: center; /* Centra los elementos verticalmente */
 }
 
+/* Estilo del contenedor principal */
 .container {
-    width: 920px;
-    height: 280px;
-    margin: 0 auto;
+    width: 950px; /* Ancho del contenedor */
+    height: 290px; /* Altura del contenedor */
+    margin: 0 auto; /* Centra el contenedor horizontalmente */
     
-    position: relative;
+    position: relative; /* Permite posicionar elementos hijos de forma absoluta dentro de este contenedor */
 
-    background: linear-gradient(#a8fdf2, transparent) #ffaf72;/*linear-gradient(#90ebff, white);*/
-    transition: background-color 1s linear;
-    overflow: hidden;
-    border: 1px solid #5b5a5a;
+    background: linear-gradient(#87CEFA, transparent) #FFFFFF; /* Fondo degradado que combina un gradiente con un color sólido */
+    transition: background-color 1s linear; /* Transición suave de color de fondo */
+    overflow: hidden; /* Oculta los elementos que sobresalen del contenedor */
+    border: 4px solid #f0f0f0; /* Borde gris oscuro */
 }
 
+/* Clases para cambiar el fondo según el momento del día */
 .mediodia {
-    background-color: #aeb9ff;
+    background: linear-gradient(#87CEEB, #FFECB3); /* Color de fondo para el mediodía */
 }
 
 .tarde {
-    background-color: #a0fc89;
+    background: linear-gradient(to top, #FFA07A, #FFFACD); /* Color de fondo para la tarde */
+}
+
+.anochecer {
+    background: linear-gradient(#bf9eff, #9393f7);; /* Color de fondo para el anochecer */
 }
 
 .noche {
-    background-color: #9f9bbb;
+    background: linear-gradient(to bottom, #01356a, #01495b); /* Color de fondo para la noche */
 }
 
+/* Estilo para el personaje del dinosaurio */
 .dino {
-    width: 84px;
-    height: 84px;
+    width: 84px; /* Ancho del dino */
+    height: 84px; /* Altura del dino */
 
-    position: absolute;
-    bottom: 22px;
-    left: 42px;
-    z-index: 2;
+    position: absolute; /* Posición absoluta respecto al contenedor */
+    bottom: 22px; /* Se coloca 22px desde la parte inferior del contenedor */
+    left: 42px; /* Se coloca 42px desde la parte izquierda del contenedor */
+    z-index: 2; /* El z-index asegura que el dino esté por encima de otros elementos como el suelo */
 
-    background: url(../img/dino.png) repeat-x 0px 0px;
-    background-size: 336px 84px;
-    background-position-x: 0px;
-
+    background: url(../img/dino.png) repeat-x 0px 0px; /* Imagen del dino y repite horizontalmente */
+    background-size: 336px 84px; /* Ajusta el tamaño del fondo para que ocupe varias fases del movimiento del dino */
+    background-position-x: 0px; /* Posición inicial del fondo */
 }
 
+/* Animación para el dino corriendo */
 .dino-corriendo {
-    animation: animarDino 0.25s steps(2) infinite;
+    animation: animarDino 0.25s steps(2) infinite; /* Cambia el fondo en intervalos de 0.25 segundos usando 2 pasos para la animación de correr */
 }
+
+/* Estado del dino cuando se estrella */
 .dino-estrellado {
-    background-position-x: -252px;
+    background-position-x: -252px; /* Ajusta la posición de fondo para mostrar la imagen del dino estrellado */
 }
 
+/* Estilo para el suelo */
 .suelo {
-    width: 200%;
-    height: 42px;
+    width: 200%; /* Doble del ancho del contenedor para crear un efecto de movimiento */
+    height: 42px; /* Altura del suelo */
 
-    position: absolute;
+    position: absolute; /* Posición absoluta en la parte inferior del contenedor */
     bottom: 0;
     left: 0;
 
-    background: url(../img/suelo.png) repeat-x 0px 0px;
-    background-size: 50% 42px;
-
+    background: url(../img/suelo.png) repeat-x 0px 0px; /* Imagen del suelo que se repite horizontalmente */
+    background-size: 50% 42px; /* Ajusta el tamaño del fondo del suelo */
 }
 
-.cactus{
-    width: 46px;
-    height: 96px;
+/* Estilo para el primer cactus */
+.cactus {
+    width: 46px; /* Ancho del cactus */
+    height: 96px; /* Altura del cactus */
 
-    position: absolute;
-    bottom: 16px;
-    left: 600px;
-    z-index: 1;
+    position: absolute; /* Posición absoluta respecto al contenedor */
+    bottom: 16px; /* 16px desde la parte inferior del contenedor */
+    left: 600px; /* Coloca el cactus a 600px desde la izquierda */
+    z-index: 1; /* El z-index asegura que esté por debajo del dino pero por encima del suelo */
 
-    background: url(../img/cactus1.png) no-repeat;
-}
-.cactus2{
-    width: 98px;
-    height: 66px;
-
-    background: url(../img/cactus2.png) no-repeat;
+    background: url(../img/cactus1.png) no-repeat; /* Imagen del cactus */
 }
 
-.nube{
+/* Estilo para el segundo cactus */
+.cactus2 {
+    width: 98px; /* Ancho del segundo cactus */
+    height: 66px; /* Altura del segundo cactus */
+
+    background: url(../img/cactus2.png) no-repeat; /* Imagen del segundo cactus */
+}
+
+/* Estilo para la nube */
+.nube {
+    width: 92px; /* Ancho de la nube */
+    height: 26px; /* Altura de la nube */
+
+    position: absolute; /* Posición absoluta en el contenedor */
+    z-index: 0; /* Nube en el fondo, detrás de otros elementos */
+
+    background: url(../img/nube.png) no-repeat; /* Imagen de la nube */
+    background-size: 92px 26px; /* Ajusta el tamaño del fondo para que coincida con las dimensiones */
+}
+
+/* Estilo para el marcador de puntaje */
+.score {
+    width: 100px; /* Ancho del marcador */
+    height: 30px; /* Altura del marcador */
+
+    position: absolute; /* Posición absoluta en el contenedor */
+    top: 5px; /* Coloca el marcador 5px desde la parte superior */
+    right: 15px; /* Coloca el marcador 15px desde la parte derecha */
+    z-index: 10; /* Asegura que el marcador esté por encima de todos los otros elementos */
+
+    color: #ff0d05; /* Color rojo para el texto */
+    font-family: Verdana; /* Fuente Verdana */
+    font-size: 30px; /* Tamaño de fuente grande */
+    font-weight: bold; /* Texto en negrita */
+    text-align: right; /* Alineación del texto a la derecha */
+}
+
+.birds {
     width: 92px;
-    height: 26px;
+    height: 80px;
 
     position: absolute;
-    z-index: 0;
-
-    background: url(../img/nube.png) no-repeat;
-    background-size: 92px 26px;
+    bottom: 100px; /* Esto lo coloca volando por encima del suelo */
+    left: 920px; /* Empieza fuera de la pantalla */
+    z-index: 1;
+    
+    background: url(../img/bird.png) repeat-x 0px 0px; /* Asegúrate de que el sprite tenga las dos posiciones */
+    background-size: 184px 80px; /* Ajusta el tamaño si el sprite tiene ambas posiciones lado a lado */
+    
+    animation: volarPajaro 3s linear infinite, animarPajaro 0.4s steps(2) infinite;
 }
 
-.score{
-    width: 100px;
-    height: 30px;
+/* Estilo para el mensaje de 'Game Over' */
+.game-over {
+    display: none; /* Oculto inicialmente */
 
-    position: absolute;
-    top: 5px;
-    right: 15px;
-    z-index: 10;
+    position: absolute; /* Posición absoluta dentro del contenedor */
+    width: 100%; /* Ancho completo del contenedor */
 
-    color: #ff0d05;
-    font-family: Verdana;
-    font-size: 30px;
-    font-weight: bold;
-    text-align: right;
+    text-align: center; /* Centra el texto horizontalmente */
+    color: #fe6958; /* Color rojo brillante para el texto */
+    font-size: 30px; /* Tamaño de fuente grande */
+    font-family: Verdana; /* Fuente Verdana */
+    font-weight: 700; /* Texto en negrita */
 }
 
-.game-over{
-    display: none;
-
-    position: absolute;
-    width: 100%;
-
-
-    text-align: center;
-    color: #f73c27;
-    font-size: 30px;
-    font-family: Verdana;
-    font-weight: 700;
+/* Estilo para el botón de reinicio */
+.reset-btn {
+    display: none; /* Oculto inicialmente */
+    position: absolute; /* Posición absoluta para posicionar debajo de 'Game Over' */
+    top: 48%; /* Ubica el botón ligeramente debajo de la mitad del contenedor */
+    left: 50%; /* Centra el botón horizontalmente */
+    transform: translate(-50%, 100%); /* Ajusta la posición para que esté debajo del texto de 'Game Over' */
+    width: 50px; /* Ancho del botón */
+    cursor: pointer; /* Cambia el cursor a una mano cuando pasa sobre el botón */
 }
 
-@keyframes animarDino{
-    from{
-        background-position-x: -84px;
+/* Animación para el dino corriendo */
+@keyframes animarDino {
+    from {
+        background-position-x: -84px; /* Inicia la animación con el fondo en esta posición */
     }
-    to{
-        background-position-x: -252px;
+    to {
+        background-position-x: -252px; /* Termina la animación con el fondo en esta posición */
+    }
+}
+
+/* Animación para alternar las posiciones de alas */
+@keyframes volarPajaro {
+    from {
+        left: 920px;
+    }
+    to {
+        left: -100px;
+    }
+}
+
+@keyframes animarPajaro {
+    from {
+        background-position-x: -89px; /* Primera posición (ala arriba) */
+    }
+    to {
+        background-position-x: -280px; /* Segunda posición (ala abajo) */
     }
 }

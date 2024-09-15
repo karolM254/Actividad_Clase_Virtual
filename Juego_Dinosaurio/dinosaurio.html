@@ -1,23 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+    <!-- Indica que este es un documento HTML5 y el idioma principal es inglés -->
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">  <!-- Especifica que la codificación de caracteres es UTF-8, permitiendo el uso de caracteres especiales -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <!-- Define la configuración de la ventana gráfica para asegurar que el sitio sea responsive, ajustándose al ancho del dispositivo -->
     <link rel="stylesheet" href="./css/dinosaurio.css">
+    <!-- Enlace a la hoja de estilos CSS externa que contiene el diseño y estilos del juego -->
     <title>Juego</title>
+     <!-- Título del documento que aparecerá en la pestaña del navegador -->
 </head>
 <body>
     <div class="container">
+       <!-- Contenedor principal del juego que agrupa todos los elementos visuales -->
 
         <div class="suelo"></div>
+        <!-- Representa el suelo en el juego. -->
         
         <div class="dino dino-corriendo"></div>
+        <!-- Representa el dinosaurio en el juego, que al cargar tiene una clase que lo hace "correr" con animación en CSS -->
 
         <div class="score">0</div>
+        <!-- Muestra el puntaje del juego, comenzando en 0, que se incrementará a medida que el jugador avance -->
+
+        <div class="birds"></div>
+        <!-- Imagen de los pájaros en el juego -->
 
     </div>
 
     <div class="game-over">GAME OVER</div>
+    <!-- Mensaje de "Game Over" que aparecerá cuando el jugador pierda -->
+    <img src="./img/reset.png" alt="reset" class="reset-btn">
+    <!-- Imagen de un botón de reinicio que permite al jugador reiniciar el juego después de perder -->
+
     <script src="./js/dinosaurio.js"></script>
+    <!-- Enlace al archivo JavaScript externo que contiene la lógica del juego. -->
 </body>
 </html>
