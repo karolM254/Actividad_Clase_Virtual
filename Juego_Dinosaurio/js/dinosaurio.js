@@ -92,6 +92,16 @@ function Update() {
     velY -= gravedad * deltaTime;  // Aplica la gravedad al dinosaurio.
 }
 
+// Hace que el dinosaurio salte
+function Saltar(){
+    if(dinoPosY === sueloY){  // Solo puede saltar si está en el suelo.
+        saltando = true;  // Marca que el dinosaurio está saltando.
+        velY = impulso;  // Aplica la velocidad de salto.
+        dino.classList.remove("dino-corriendo");  // Quita la animación de correr mientras salta.
+        dino.classList.remove("dino-agachado"); // Quita la animación de correr mientras se agacha.
+    }
+}
+
 // Manejador del evento cuando se presiona una tecla
 function HandleKeyDown(ev){
     if(ev.keyCode == 32){  // Si la tecla es la barra espaciadora (código 32).
@@ -99,14 +109,42 @@ function HandleKeyDown(ev){
     }
 }
 
-// Hace que el dinosaurio salte
-function Saltar(){
-    if(dinoPosY === sueloY){  // Solo puede saltar si está en el suelo.
-        saltando = true;  // Marca que el dinosaurio está saltando.
-        velY = impulso;  // Aplica la velocidad de salto.
-        dino.classList.remove("dino-corriendo");  // Quita la animación de correr mientras salta.
+// Función manejadora del evento cuando se presiona una tecla en el teclado
+function HandleKeyDown(ev) {
+    // Verifica si la tecla presionada es la barra espaciadora (código 32)
+    if (ev.keyCode === 32) {  
+        // Llama a la función Saltar() para que el dinosaurio salte
+        Saltar();
+    // Verifica si la tecla presionada es la tecla hacia abajo (código 40)
+    } else if (ev.keyCode === 40) {  
+        // Llama a la función AgacharseDino() para que el dinosaurio se agache
+        AgacharseDino();
     }
 }
+
+// Manejador del evento cuando se suelta una tecla
+function HandleKeyUp(ev) {
+    if (ev.keyCode === 40) {  // Si se suelta la tecla hacia abajo.
+        LevantarseDino();  // Llama a la función para levantarse.
+    }
+}
+
+function AgacharseDino() {
+    if (!saltando && dinoPosY === sueloY) {  // Solo se puede agachar si no está saltando y está en el suelo.
+        dino.classList.add("dino-agachado");  // Agrega la clase de agacharse.
+        dino.classList.remove("dino-corriendo");  // Quita la clase de correr.
+    }
+}
+
+function LevantarseDino() {
+    if (!saltando && dinoPosY === sueloY) {  // Solo se puede levantar si no está saltando y está en el suelo.
+        dino.classList.remove("dino-agachado");  // Quita la clase de agacharse.
+        dino.classList.add("dino-corriendo");  // Vuelve a poner la clase de correr.
+    }
+}
+
+document.addEventListener('keydown', HandleKeyDown);
+document.addEventListener('keyup', HandleKeyUp);
 
 // Mueve el dinosaurio en base a su velocidad
 function MoverDinosaurio() {
@@ -172,7 +210,7 @@ function CrearObstaculo() {
     var obstaculo = document.createElement("div");  // Crea un nuevo div para el obstáculo.
     contenedor.appendChild(obstaculo);  // Lo añade al contenedor del juego.  //appenChild agregar nuevos elementos a elementos de un documento o tambien para moverlo el elemento de la pagina
     obstaculo.classList.add("cactus");  // Añade la clase de cactus.
-    if(Math.random() > 0.5) obstaculo.classList.add("cactus2");  // A veces añade una clase extra para variación.
+    if(Math.random() > 0.6) obstaculo.classList.add("cactus2");  // A veces añade una clase extra para variación.
     obstaculo.posX = contenedor.clientWidth;  // Coloca el obstáculo en el borde derecho.  //clienteWidth es para determinar el límite máximo de la pantalla donde se deben generar o mover los obstáculos 
     obstaculo.style.left = contenedor.clientWidth + "px";  // Lo coloca visualmente en el borde derecho.
 
@@ -220,6 +258,8 @@ function MoverNubes() {
     }
 }
 
+const birds = document.querySelector('.birds'); // Selecciona el elemento con la clase 'birds'
+
 // Aumenta la puntuación del jugador
 function GanarPuntos() {
     score++;  // Incrementa la puntuación en 1.
@@ -228,17 +268,28 @@ function GanarPuntos() {
         gameVel = 1.5;  // Aumenta la velocidad del juego.
         contenedor.classList.add("mediodia");  // Cambia el fondo a mediodía.
     } else if(score == 10) {  // A los 10 puntos.
-        gameVel = 2;  // Aumenta aún más la velocidad.
+        gameVel = 1.9;  // Aumenta aún más la velocidad.
         contenedor.classList.add("tarde");  // Cambia el fondo a la tarde.
     } else if(score == 20) {  // A los 20 puntos.
-        gameVel = 2.5;  // Aumenta la velocidad al máximo.
+        gameVel = 2.4;  // Aumenta la velocidad al máximo.
         contenedor.classList.add("anochecer");  // Cambia el fondo a la anochecer.
     } else if(score == 30) {  // A los 30 puntos.
-        gameVel = 3;  // Aumenta la velocidad al máximo.
+        gameVel = 2.8;  // Aumenta la velocidad al máximo.
         contenedor.classList.add("noche");  // Cambia el fondo a la noche.
     }
 
     suelo.style.animationDuration = (3 / gameVel) + "s";  // Ajusta la duración de la animación del suelo según la velocidad.
+
+    // Condición para que los pájaros aparezcan cuando el puntaje sea mayor a 15.
+    if (score >= 15) {
+        birds.classList.add("aparecer");  // Agrega la clase que muestra los pájaros.
+
+        // Alterna la posición del pájaro aleatoriamente (más cerca del suelo o más arriba).
+        var birdPosition = Math.random() > 0.5 ? "70px" : "40px";  // 78px para más cerca del suelo, 40px para más alto.
+        birds.style.bottom = birdPosition;  // Cambia la posición vertical.
+    } else {
+        birds.classList.remove("aparecer");  // Asegura que se ocultan si la puntuación es menor a 15.
+    }
 }
 
 // Maneja el fin del juego
@@ -281,16 +332,30 @@ function DetectarColision() {
     }
 }
 
-// Función para detectar si dos elementos HTML colisionan, considerando un padding
+// Función que detecta si dos elementos HTML (como el dinosaurio y un obstáculo) colisionan, considerando un padding.
 function IsCollision(a, b, paddingTop, paddingRight, paddingBottom, paddingLeft) {
-    var aRect = a.getBoundingClientRect();  // Obtiene las coordenadas del dinosaurio.
-    var bRect = b.getBoundingClientRect();  // Obtiene las coordenadas del obstáculo o pájaro.
+    
+    // Obtiene las coordenadas del rectángulo delimitador del elemento 'a' (en este caso, el dinosaurio).
+    var aRect = a.getBoundingClientRect();  
+    
+    // Obtiene las coordenadas del rectángulo delimitador del elemento 'b' (en este caso, el obstáculo o pájaro).
+    var bRect = b.getBoundingClientRect();  
+    
+    // Compara las posiciones de los dos rectángulos para determinar si hay una colisión.
+    // Si una de estas comparaciones es verdadera, significa que no hay colisión, ya que los elementos
+    // están suficientemente alejados uno del otro.
 
-    // Compara las posiciones de los rectángulos para determinar si hay colisión.
     return !(
-        ((aRect.top + aRect.height - paddingBottom) < (bRect.top)) ||
-        (aRect.top + paddingTop > (bRect.top + bRect.height)) ||
-        ((aRect.left + aRect.width - paddingRight) < bRect.left) ||
+        // Verifica si el borde inferior del rectángulo 'a' (con el padding aplicado) está por encima del borde superior de 'b'. 
+        ((aRect.top + aRect.height - paddingBottom) < (bRect.top)) ||  
+        
+        // Verifica si el borde superior del rectángulo 'a' (con el padding aplicado) está por debajo del borde inferior de 'b'.
+        (aRect.top + paddingTop > (bRect.top + bRect.height)) || 
+        
+        // Verifica si el borde derecho del rectángulo 'a' (con el padding aplicado) está a la izquierda del borde izquierdo de 'b'.
+        ((aRect.left + aRect.width - paddingRight) < bRect.left) || 
+        
+        // Verifica si el borde izquierdo del rectángulo 'a' (con el padding aplicado) está a la derecha del borde derecho de 'b'.
         (aRect.left + paddingLeft > (bRect.left + bRect.width))
     );
 }
@@ -298,52 +363,58 @@ function IsCollision(a, b, paddingTop, paddingRight, paddingBottom, paddingLeft)
 // Reinicia el estado del juego
 function ReiniciarJuego() {
     // Restablece las posiciones y velocidades a los valores iniciales
-    dinoPosX = 42;
-    dinoPosY = sueloY;
-    velY = 0;
-    parado = false;
-    saltando = false;
-    score = 0;
-    gameVel = 1;
-    sueloX = 0;
-
+    dinoPosX = 42;  // Posición horizontal inicial del dinosaurio
+    dinoPosY = sueloY;  // Posición vertical inicial del dinosaurio en relación al suelo
+    velY = 0;  // Velocidad vertical del dinosaurio (sin movimiento)
+    parado = false;  // El dinosaurio no está parado
+    saltando = false;  // El dinosaurio no está saltando
+    score = 0;  // Reinicia el puntaje
+    gameVel = 1;  // Velocidad inicial del juego
+    sueloX = 0;  // Posición inicial del suelo
+    
     // Elimina los obstáculos, nubes y pájaros
     obstaculos.forEach(function(obstaculo) {
-        obstaculo.parentNode.removeChild(obstaculo);
+        obstaculo.parentNode.removeChild(obstaculo);  // Elimina cada obstáculo del DOM
     });
-    obstaculos = [];
-
+    obstaculos = [];  // Vacía el array de obstáculos
+    
     nubes.forEach(function(nube) {
-        nube.parentNode.removeChild(nube);
+        nube.parentNode.removeChild(nube);  // Elimina cada nube del DOM
     });
-    nubes = [];
-
+    nubes = [];  // Vacía el array de nubes
+    
+    birds = [];  // Vacía el array de pájaros
+    
     // Restablece la apariencia del dinosaurio y el suelo
-    dino.classList.add("dino-corriendo");
-    dino.classList.remove("dino-estrellado");
-    suelo.style.left = "0px";
-
+    dino.classList.add("dino-corriendo");  // Asegura que el dinosaurio vuelva a estar en el estado "corriendo"
+    dino.classList.remove("dino-estrellado");  // Elimina el estado de colisión o "estrellado" del dinosaurio
+    suelo.style.left = "0px";  // Restablece la posición del suelo
+    
     // Oculta el mensaje de "Game Over" y el botón de reiniciar
-    gameOver.style.display = "none";
-    document.querySelector('.reset-btn').style.display = "none";
-
+    gameOver.style.display = "none";  // Oculta el mensaje de fin del juego
+    document.querySelector('.reset-btn').style.display = "none";  // Oculta el botón de reiniciar
+    
     // Restablece el puntaje visible
-    textoScore.innerText = score;
-
+    textoScore.innerText = score;  // Muestra el puntaje reiniciado en pantalla
+    
     // Reinicia el tiempo de obstáculos y nubes
-    tiempoHastaObstaculo = 2;
-    tiempoHastaNube = 0.5;
-
+    tiempoHastaObstaculo = 2;  // Tiempo inicial antes de que aparezca un nuevo obstáculo
+    tiempoHastaNube = 0.5;  // Tiempo inicial antes de que aparezca una nueva nube
+    
     // Restablece la apariencia de día
-    contenedor.classList.remove("mediodia", "tarde", "anochecer", "noche");
-
+    contenedor.classList.remove("mediodia", "tarde", "anochecer", "noche");  // Quita todas las clases de cambio de tiempo (día, tarde, noche)
+    
+    // Oculta los pájaros al reiniciar el juego
+    var birds = document.querySelector('.birds');
+    birds.classList.remove("aparecer");  // Asegura que los pájaros no aparezcan justo después de reiniciar.
+    
     // Reanuda la animación de los pájaros
     var birds = document.querySelectorAll(".birds");
     birds.forEach(function(bird) {
-        bird.style.animationPlayState = "running";  // Reanuda la animación de los pájaros.
+        bird.style.animationPlayState = "running";  // Reanuda la animación de vuelo de los pájaros.
     });
-
+    
     // Reinicia el tiempo y comienza el loop del juego nuevamente
-    time = new Date();  
-    Loop();  // Vuelve a ejecutar el loop del juego.
+    time = new Date();  // Establece el tiempo actual como referencia para el loop del juego.
+    Loop();  // Reinicia el ciclo principal del juego para que vuelva a ejecutarse.
 }

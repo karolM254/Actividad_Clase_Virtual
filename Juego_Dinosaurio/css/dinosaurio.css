@@ -7,15 +7,15 @@
 /* Estilo del cuerpo del documento para ocupar toda la altura de la pantalla y alinear elementos al centro vertical */
 body{
     height: 100vh; /* Define la altura de la pantalla como el 100% del viewport */
-    background: #484848; /* Color de fondo azul claro */
+    background: #545454; /* Color de fondo azul claro */
     display: flex; /* Flexbox para alinear los elementos hijos */
     align-items: center; /* Centra los elementos verticalmente */
 }
 
 /* Estilo del contenedor principal */
 .container {
-    width: 950px; /* Ancho del contenedor */
-    height: 290px; /* Altura del contenedor */
+    width: 970px; /* Ancho del contenedor */
+    height: 300px; /* Altura del contenedor */
     margin: 0 auto; /* Centra el contenedor horizontalmente */
     
     position: relative; /* Permite posicionar elementos hijos de forma absoluta dentro de este contenedor */
@@ -66,6 +66,19 @@ body{
 /* Estado del dino cuando se estrella */
 .dino-estrellado {
     background-position-x: -252px; /* Ajusta la posición de fondo para mostrar la imagen del dino estrellado */
+}
+
+.dino-agachado{
+    width: 116px; /* Ancho del dino agachado, igual al ancho del dino corriendo */
+    height: 52px; /* Altura ajustada para mostrar el dino agachado completo */
+    position: absolute; /* Posición absoluta respecto al contenedor */
+    bottom: 22px; /* Mantén la misma distancia desde la parte inferior del contenedor */
+    left: 42px; /* Mantén la misma distancia desde la parte izquierda del contenedor */
+    z-index: 2; /* Asegúrate de que el dino agachado esté por encima de otros elementos */
+
+    background: url(../img/dino_agachado.png) no-repeat 0px 0px; /* Imagen del dino agachado */
+    background-position: 0 0; /* Alinea el fondo en la posición inicial */
+    animation: moverPiesAgachado 0.5s steps(2) infinite; /* Animación para mover los pies del dino agachado */
 }
 
 /* Estilo para el suelo */
@@ -124,7 +137,7 @@ body{
     right: 15px; /* Coloca el marcador 15px desde la parte derecha */
     z-index: 10; /* Asegura que el marcador esté por encima de todos los otros elementos */
 
-    color: #ff0d05; /* Color rojo para el texto */
+    color: #ff6660; /* Color rojo para el texto */
     font-family: Verdana; /* Fuente Verdana */
     font-size: 30px; /* Tamaño de fuente grande */
     font-weight: bold; /* Texto en negrita */
@@ -136,15 +149,21 @@ body{
     height: 80px;
 
     position: absolute;
-    bottom: 100px; /* Esto lo coloca volando por encima del suelo */
-    left: 920px; /* Empieza fuera de la pantalla */
+    bottom: 70px; /* Esto lo coloca volando por encima del suelo */
+    right: -100px; /* Empieza fuera de la pantalla, a la derecha */
     z-index: 1;
     
     background: url(../img/bird.png) repeat-x 0px 0px; /* Asegúrate de que el sprite tenga las dos posiciones */
     background-size: 184px 80px; /* Ajusta el tamaño si el sprite tiene ambas posiciones lado a lado */
     
-    animation: volarPajaro 3s linear infinite, animarPajaro 0.4s steps(2) infinite;
+    animation: volarPajaro 1s linear infinite, animarPajaro 0.4s steps(2) infinite;
+    display: none; /* Oculta los pájaros inicialmente */
+   
 }
+/* Ahora aplicamos la clase 'aparecer' directamente a .birds */
+.birds.aparecer{
+    display: block; /* Los pájaros aparecerán cuando se añada esta clase */
+} 
 
 /* Estilo para el mensaje de 'Game Over' */
 .game-over {
@@ -169,6 +188,7 @@ body{
     transform: translate(-50%, 100%); /* Ajusta la posición para que esté debajo del texto de 'Game Over' */
     width: 50px; /* Ancho del botón */
     cursor: pointer; /* Cambia el cursor a una mano cuando pasa sobre el botón */
+    z-index: 3;
 }
 
 /* Animación para el dino corriendo */
@@ -184,10 +204,10 @@ body{
 /* Animación para alternar las posiciones de alas */
 @keyframes volarPajaro {
     from {
-        left: 920px;
+        right: -100px; /* Empieza fuera de la pantalla a la derecha */
     }
     to {
-        left: -100px;
+        right: 100%; /* Termina fuera de la pantalla a la izquierda */
     }
 }
 
@@ -199,3 +219,4 @@ body{
         background-position-x: -280px; /* Segunda posición (ala abajo) */
     }
 }
+
